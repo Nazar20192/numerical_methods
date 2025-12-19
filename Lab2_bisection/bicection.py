@@ -1,18 +1,18 @@
-def f(x): return x**3 - x - 3
-
-def bisection(a, b, tol): fa, fb = f(a), f(b) if fa * fb >= 0: print("Помилка: однакові знаки на краях") return None
+if fa * fb >= 0:
+    print("Помилка: однакові знаки на краях")
+    return None
 
 step = 0
 while (b - a) / 2 > tol:
     step += 1
     c = (a + b) / 2
     fc = f(c)
-    
-    print(f"Крок {step}: c = {c:.5f}, f(c) = {fc:.5f}")
+
+    print("Крок", step, ": c =", round(c, 5), ", f(c) =", round(fc, 5))
 
     if fc == 0:
         return c
-    
+
     if fa * fc < 0:
         b = c
         fb = fc
@@ -21,3 +21,11 @@ while (b - a) / 2 > tol:
         fa = fc
 
 return (a + b) / 2
+a = float(input("Введіть a: "))
+b = float(input("Введіть b: "))
+tol = float(input("Введіть точність: "))
+
+root = bisection(a, b, tol)
+
+if root is not None:
+print("Наближений корінь:", round(root, 6))
